@@ -15,6 +15,7 @@ use paraloom_prover_wasm::{
 };
 
 const KEYS_DIR: &str = "../paraloom-core/keys";
+const NATIVE_SOL_ASSET: [u8; 32] = [0u8; 32];
 
 fn fr_to_le(f: &Fr) -> [u8; 32] {
     let mut out = [0u8; 32];
@@ -114,6 +115,7 @@ fn prove_transact_roundtrips_against_the_persistent_keys() {
         &hx(&fr_to_le(&root)),
         -500,
         &hx(&recipient),
+        &hx(&NATIVE_SOL_ASSET),
         &inputs,
         &outputs,
     )
@@ -249,6 +251,7 @@ fn v3_merkle_path_output_proves_membership() {
         &root_hex,
         -500,
         &hx(&[3u8; 32]),
+        &hx(&NATIVE_SOL_ASSET),
         &inputs,
         &outputs,
     );
